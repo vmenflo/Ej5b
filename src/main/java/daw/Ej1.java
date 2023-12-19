@@ -67,6 +67,24 @@ public class Ej1 {
         System.out.println("El numero " + numero
                 + " se encuentra en la posicion " + posicion);
 
+        //Probamos Método burbuja
+        int[] desordenados = {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        System.out.println("Tenemos esta array : " + Arrays.toString(desordenados));
+        burbuja(desordenados);
+        System.out.println("Probamos a ordenarlos con nuestro metodo burbuja : "
+                + Arrays.toString(desordenados));
+
+        //Probamos Método binario
+        int elemento = binario(desordenados, 5);
+        System.out.println("La posicion es " + elemento);
+
+        //Probamos el metodo equals a mano
+        int[] array1 = {1, 2, 3, 4, 5};
+        int[] array2 = {1, 2, 3, 4, 5};
+
+        boolean sonIgual = sonIguales(array1, array2);
+        System.out.println("Son iguales? " + sonIgual);
+
     }
 
     //Método para recibir un array y rellenarlos con aleatorios entre 10 y 100
@@ -79,6 +97,60 @@ public class Ej1 {
         }
 
         return array;
+    }
+
+    //Método Burbuja(array)
+    public static void burbuja(int[] array) {
+        int tmp;
+        for (int i = 0; i < array.length - 1; i++) {
+            for (int j = i + 1; j < array.length; j++) {
+                if (array[i] > array[j]) {
+                    tmp = array[i];
+                    array[i] = array[j];
+                    array[j] = tmp;
+                }
+            }
+        }
+
+    }
+
+    //Método binario(array,elemento)
+    public static int binario(int[] array, int elemento) {
+        int mitad = -1;
+        int izquierda = 0;
+        int derecha = array.length - 1;
+        boolean encontrado = false;
+        while ((izquierda <= derecha) && (!encontrado)) {
+            mitad = (izquierda + derecha) / 2;
+            if (array[mitad] == elemento) {
+                encontrado = true;
+            } else if (array[mitad] > elemento) {
+                derecha = mitad - 1; //buscar en el trozo izquierdo
+            } else {
+                izquierda = mitad + 1; // buscar en el trozo derecho
+            }
+        }
+        if (encontrado) {
+            return mitad;
+        } else {
+            return -1;
+        }
+
+    }
+
+    //Método implementado de equals
+    public static boolean sonIguales(int[] array, int[] array2) {
+        //Comparamos el tamaño de cada array
+        if (array.length != array2.length) {
+            return false;
+        }
+        //Bucle para recorrer cada posicion y comparar si son diferentes
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] != array2[i]) {
+               return false;}
+
+    }
+        return true;
     }
 
 }
